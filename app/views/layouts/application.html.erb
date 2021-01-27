@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RubyBlog</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  	<section class="hero is-dark is-medium">
+	  <div class="hero-head">
+	    <nav class="navbar">
+	      <div class="container">
+	        <div class="navbar-brand">
+	          <%= link_to 'Home', root_path, class: "navbar-item" %>
+	          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+	            <span></span>
+	            <span></span>
+	            <span></span>
+	          </span>
+	        </div>
+	        <div id="navbarMenuHeroA" class="navbar-menu">
+	        	<div class="navbar-end">
+	          		<% if user_signed_in? %>	
+	          	  		<% if current_user.type_user == 'admin' %>
+				          	<a class="navbar-item">
+				            	<%= link_to "Create New Post", new_post_path, class:"navbar-item" %>
+	            			</a>
+			      		<% end %>
+		          		<a class="navbar-item">
+		            		<%= link_to "Logout", destroy_user_session_path, method: :delete, class:"navbar-item" %>
+	    				</a>
+	          		<% else %>
+	          			<a class="navbar-item">
+		            		<%= link_to "Login", new_user_session_path, class:"navbar-item" %>
+	    				</a>
+	    				<a class="navbar-item">
+		            		<%= link_to "Sign Up", new_user_registration_path, class:"navbar-item" %>
+	    				</a>
+	    			<% end %>		
+		        </div>         	          
+	        </div>
+	      </div>
+	    </nav>
+	  </div>
+
+
+	  <!-- Hero content: will be in the middle -->
+	  <div class="hero-body">
+	    <div class="container has-text-centered">
+	      <h1 class="title">
+	        <%= 'Ruby on Rails' %>
+	      </h1>
+	    </div>
+	  </div>
+	</section>
+    <%= yield %>
+  </body>
+</html>
